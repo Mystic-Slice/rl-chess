@@ -24,21 +24,13 @@ def process_example(sample):
     PROMPT_MESSAGES = [
         {
             'role': 'user',
-            'content': "You are given a chess board. You should suggest the next best move from that position. Output your reasoning between <reasoning> and </reasoning> symbols. Keep it short. Output the final move between <best_move> and </best_move> symbols."\
+            'content': "You are given a chess board. You should suggest the next best move from that position. Output your reasoning between <reasoning> and </reasoning> symbols. Output the final move between <best_move> and </best_move> symbols."\
                 f"Chess Board: \n{board_string}" \
         }
     ]
 
-    # COMPLETION_MESSAGES = [
-    #     {
-    #         'role': 'assistant',
-    #         'content': f"<reasoning>{sample['reasoning']}</reasoning><best_move>{best_move}</best_move>"
-    #     }
-    # ]
-
     return {
         'prompt': PROMPT_MESSAGES,
-        # 'completion': COMPLETION_MESSAGES
     }
 
 def get_data():

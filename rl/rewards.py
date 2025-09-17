@@ -20,7 +20,7 @@ def format_reward(completions, **kwargs):
     pattern = r"^<reasoning>.*?</reasoning>\s*<best_move>[a-h][1-8][a-h][1-8]</best_move>$"
     completion_contents = [completion[0]["content"] for completion in completions]
     matches = [re.match(pattern, content) for content in completion_contents]
-    rewards_list = [1.0 if match else 0.0 for match in matches]
+    rewards_list = [1.0 if match else -1.0 for match in matches]
     return rewards_list
 
 def accuracy_reward(completions, fen, best_move, **kwargs):
@@ -38,11 +38,11 @@ def accuracy_reward(completions, fen, best_move, **kwargs):
         print("Completion: ", comp)
         print("="*50)
         if move is None:
-            scores.append(-2000)
+            scores.append(-1000)
         else:
             scores.append(stockfish.get_score(fen, move))
 
-    rewards = [score/500.0 for score in scores]
+    rewards = [score/1000.0 for score in scores]
 
     print("Final scores: ", scores)
     print("Final rewards: ", rewards)
