@@ -298,8 +298,10 @@ def load_checkpoint(model, optimizer, exp_dir):
         model.load_state_dict(training_state['model_state_dict'])
         optimizer.load_state_dict(training_state['optimizer_state_dict'])
         
+        model.to('cpu')
         # Update VLLM engine with loaded weights
         load_model_into_vllm(model, inference_engine)
+        model.to('cuda')
         
         return ckpt_iter + 1
     return 0

@@ -353,9 +353,9 @@ def find_last_checkpoint(exp_dir: Path) -> Tuple[Optional[Path], Optional[int]]:
     checkpoint_dir = exp_dir / "checkpoints"
     checkpoints = list(checkpoint_dir.glob("ckpt_*"))
     # Filter out directories that don't have a deepspeed subdirectory
-    checkpoints = [ckpt for ckpt in checkpoints if (ckpt / "deepspeed").exists()]
-    if not checkpoints:
-        return None, None
+    # checkpoints = [ckpt for ckpt in checkpoints if (ckpt / "deepspeed").exists()]
+    # if not checkpoints:
+    #    return None, None
     ckpt_path = max(checkpoints, key=lambda x: int(x.stem.split("_")[-1]))
     ckpt_iter = int(ckpt_path.stem.split("_")[-1])
     return ckpt_path, ckpt_iter
